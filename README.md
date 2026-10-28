@@ -1,5 +1,5 @@
 # Ex. No:1b 			Study of Client Server Chat Applications
-
+## NAME:  H.MOHAMMED IRFAN
 ## Aim: 
 To perform a study on Client Server Chat Applications
 ## Introduction:
@@ -72,6 +72,39 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+## CLIENT PROGRAM:
+```
+import socket
+s = socket.socket()
+s.connect(('localhost', 8000))
+print("Client Socket:", s.getsockname())
+data = s.recv(1024).decode()
+print("Server Date & Time:", data)
+s.send("Acknowledgement received from client".encode())
+s.close()
+```
+## OUYPUT:
+<img width="1173" height="601" alt="Screenshot 2026-10-28 085424" src="https://github.com/user-attachments/assets/002795ed-d712-4389-a1b2-25d3d1171415" />
+
+## SERVER PROGRAM:
+```
+import socket
+from datetime import datetime
+s = socket.socket()
+s.bind(('localhost', 8000))
+s.listen(5)
+print("Server waiting for connection...")
+c, addr = s.accept()
+print("Client connected:", addr)
+now = datetime.now()
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ack = c.recv(1024).decode()
+if ack:
+    print(ack)
+c.close()
+```
+## OUTPUT:
+<img width="1171" height="482" alt="image" src="https://github.com/user-attachments/assets/8228143a-2bcd-4b53-a57d-4a1352a542ad" />
 
 
 ## Result:
